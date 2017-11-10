@@ -76,7 +76,8 @@ public class WxRedPackController extends WxPayApiController {
 
             String return_code = xmlToMap.get("return_code");
             String result_code = xmlToMap.get("result_code");
-            if (codeIsOK(return_code) && codeIsOK(result_code)) {
+            
+            if (PaymentKit.codeIsOK(return_code)&& PaymentKit.codeIsOK(result_code)) {
             	renderJson(true);
             } else {
               	renderJson(false);
@@ -117,21 +118,11 @@ public class WxRedPackController extends WxPayApiController {
 
             String return_code = xmlToMap.get("return_code");
             String result_code = xmlToMap.get("result_code");
-            if (codeIsOK(return_code) && codeIsOK(result_code)) {
+            if (PaymentKit.codeIsOK(return_code)&& PaymentKit.codeIsOK(result_code)) {
             	renderJson(true);
             } else {
               	renderJson(false);
             }
-    }
-
-    /**
-     * 判断接口返回的code是否是SUCCESS
-     *
-     * @param return_code、result_code
-     * @return
-     */
-    public static boolean codeIsOK(String return_code) {
-        return StrKit.notBlank(return_code) && "SUCCESS".equals(return_code);
     }
 
     //根据订单号查询红包状态
